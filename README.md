@@ -1,6 +1,6 @@
 # Images for Java development
 
-## Supported tags and respective ```**Dockerfile**``` links
+## Supported tags and respective ```Dockerfile``` links
 
 * ```jdk-8```
 
