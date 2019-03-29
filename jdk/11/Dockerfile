@@ -1,4 +1,4 @@
-FROM  phusion/baseimage:0.9.17
+FROM  phusion/baseimage:0.11
 
 MAINTAINER  Mariusz Kraj <mariusz.kraj@codibly.com>
 
@@ -9,21 +9,17 @@ RUN apt-get -y update
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q \
     python-software-properties \
     software-properties-common \
-    unzip \
-    git
+    unzip
 
-ENV JAVA_VER 8
+ENV JAVA_VER 11
 ENV JAVA_HOME /usr/lib/jvm/java-${JAVA_VER}-oracle
 
-RUN echo 'deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' >> /etc/apt/sources.list && \
-    echo 'deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' >> /etc/apt/sources.list && \
-    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C2518248EEA14886 && \
+RUN add-apt-repository -y ppa:linuxuprising/java && \
     apt-get update && \
-    echo oracle-java${JAVA_VER}-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections && \
-    apt-get install -y --force-yes --no-install-recommends oracle-java${JAVA_VER}-installer oracle-java${JAVA_VER}-set-default && \
+    echo "oracle-java${JAVA_VER}-installer shared/accepted-oracle-license-v1-2 select true" | /usr/bin/debconf-set-selections && \
+    apt-get install -y --no-install-recommends oracle-java${JAVA_VER}-installer oracle-java${JAVA_VER}-set-default && \
     apt-get clean && \
     rm -rf /var/cache/oracle-jdk${JAVA_VER}-installer
-
 
 RUN update-java-alternatives -s java-${JAVA_VER}-oracle
 
