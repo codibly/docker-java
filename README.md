@@ -2,10 +2,14 @@
 
 ### Supported tags and respective ```Dockerfile``` links
 
-* ```jdk-8``` Oracle Java 8 on Ubuntu base image
+##### Java
+* ```jdk-8```  Oracle Java 8 on Ubuntu base image
+* ```jdk-11``` Oracle Java 11 on Ubuntu base image
 
+##### Java with Gradle
 * ```gradle-4.8``` Above + Gradle 4.8
 
+##### Java with Maven
 * ```maven-3.5``` Above + Maven 3.5
 
 ### How to create a new image
